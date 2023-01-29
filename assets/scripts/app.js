@@ -13,6 +13,17 @@ function writeOutput(operator, resultBeforeCalc, calcNumber) {
   outputResult(currentResult, calcDescription); // outputs result onto page when addNums function runs
 }
 
+function writeToLog(operationID, prevResult, operationNumber, newResult) {
+  const logEntry = {
+    operation: operationID,
+    prevResult: prevResult,
+    number: operationNumber,
+    result: newResult,
+  };
+  logEntries.push(logEntry); // pushed enteredNumber into an array to keep track of it
+  console.log(logEntries); // zero based arrays
+}
+
 function addNums() {
   const enteredNumber = getUserInputNum();
   const initialResult = currentResult;
@@ -20,15 +31,7 @@ function addNums() {
   //currentResult = currentResult + +userInput.value; // second plus parses as a number insted of a string but is less explicat
 
   writeOutput('+', initialResult, enteredNumber);
-  const logEntry = {
-    operation: 'ADD',
-    prevResult: initialResult,
-    number: enteredNumber,
-    result: currentResult
-  }; // creating an object
-  logEntries.push(logEntry); // pushed enteredNumber into an array to keep track of it 
-  console.log(logEntry.operation);
-  console.log(logEntries); // zero based arrays
+  writeToLog('ADD', initialResult, enteredNumber, currentResult);
 }
 
 function subtractNums() {
@@ -37,6 +40,7 @@ function subtractNums() {
   currentResult -= enteredNumber;
 
   writeOutput('-', initialResult, enteredNumber);
+  writeToLog('SUBTRACT', initialResult, enteredNumber, currentResult);
 }
 
 function multiplyNums() {
@@ -45,6 +49,7 @@ function multiplyNums() {
   currentResult *= enteredNumber;
 
   writeOutput('*', initialResult, enteredNumber);
+  writeToLog('MULTIPLY', initialResult, enteredNumber, currentResult);
 }
 
 function divideNums() {
@@ -53,6 +58,7 @@ function divideNums() {
   currentResult /= enteredNumber;
 
   writeOutput('/', initialResult, enteredNumber);
+  writeToLog('DIVIDE', initialResult, enteredNumber, currentResult);
 }
 
 addBtn.addEventListener('click', addNums);
