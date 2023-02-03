@@ -24,14 +24,27 @@ function writeToLog(operationID, prevResult, operationNumber, newResult) {
   console.log(logEntries); // zero based arrays
 }
 
-function addNums() {
+function calculateResult(calculationType){
   const enteredNumber = getUserInputNum();
   const initialResult = currentResult;
-  currentResult += enteredNumber; // parse int parses as a number insted of a string can also use parseFloat (more specific)
-  //currentResult = currentResult + +userInput.value; // second plus parses as a number insted of a string but is less explicat
+  let mathOperator;
 
-  writeOutput('+', initialResult, enteredNumber);
-  writeToLog('ADD', initialResult, enteredNumber, currentResult);
+  if (calculationType === 'ADD') {
+    currentResult += enteredNumber;
+    mathOperator = '+';
+  } else {
+    currentResult -= enteredNumber;
+    mathOperator = '-';
+  }
+
+  
+  writeOutput(mathOperator, initialResult, enteredNumber);
+  writeToLog(calculationType, initialResult, enteredNumber, currentResult);
+}
+
+
+function addNums() {
+  calculateResult('ADD');
 }
 
 function subtractNums() {
