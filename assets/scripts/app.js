@@ -25,53 +25,56 @@ function writeToLog(operationID, prevResult, operationNumber, newResult) {
 }
 
 function calculateResult(calculationType){
+  
+  if (calculationType !== 'add' 
+  && calculationType !== 'subtract'
+  && calculationType !== 'multiply'
+  && calculationType !== 'divide'
+  ) {
+    return;
+  } // there is more than one way to do this
+  
+  
   const enteredNumber = getUserInputNum();
   const initialResult = currentResult;
   let mathOperator;
 
-  if (calculationType === 'ADD') {
+  if (calculationType === 'add') {
     currentResult += enteredNumber;
     mathOperator = '+';
-  } else {
+  } else if (calculationType === 'subtract') {
     currentResult -= enteredNumber;
     mathOperator = '-';
+  } else if (calculationType === 'multiply'){
+    currentResult *= enteredNumber;
+    mathOperator = '*';
+  } else if (calculationType === 'divide'){
+    currentResult /= enteredNumber;
+    mathOperator = '/'
   }
 
-  
+      
+
+
   writeOutput(mathOperator, initialResult, enteredNumber);
   writeToLog(calculationType, initialResult, enteredNumber, currentResult);
 }
 
 
 function addNums() {
-  calculateResult('ADD');
+  calculateResult('add');
 }
 
 function subtractNums() {
-  const enteredNumber = getUserInputNum();
-  const initialResult = currentResult;
-  currentResult -= enteredNumber;
-
-  writeOutput('-', initialResult, enteredNumber);
-  writeToLog('SUBTRACT', initialResult, enteredNumber, currentResult);
+  calculateResult('subtract');
 }
 
 function multiplyNums() {
-  const enteredNumber = getUserInputNum();
-  const initialResult = currentResult;
-  currentResult *= enteredNumber;
-
-  writeOutput('*', initialResult, enteredNumber);
-  writeToLog('MULTIPLY', initialResult, enteredNumber, currentResult);
+  calculateResult('multiply');
 }
 
 function divideNums() {
-  const enteredNumber = getUserInputNum();
-  const initialResult = currentResult;
-  currentResult /= enteredNumber;
-
-  writeOutput('/', initialResult, enteredNumber);
-  writeToLog('DIVIDE', initialResult, enteredNumber, currentResult);
+  calculateResult('divide');
 }
 
 addBtn.addEventListener('click', addNums);
