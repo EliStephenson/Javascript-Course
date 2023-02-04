@@ -29,7 +29,9 @@ function calculateResult(calculationType){
   if (calculationType !== 'add' 
   && calculationType !== 'subtract'
   && calculationType !== 'multiply'
-  && calculationType !== 'divide'
+  && calculationType !== 'divide' ||
+  //enteredNumber === 0 //because this doesnt make sense in any of the mathematical cases
+  !enteredNumber // does a similar thing to above because it inverts the falsey to be true which exits the function
   ) {
     return;
   } // there is more than one way to do this
